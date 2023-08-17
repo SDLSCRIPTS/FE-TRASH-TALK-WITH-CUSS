@@ -304,7 +304,7 @@ local chat = function(MSG)
 
   if msg:lower():sub(1,73) == "-hello!" then
     chat("Hey! I am an pet BOT.")
- wait(1)
+ wait(3)
     chat("Do you wanna buy the premium version of me? Say less! Type '-see premium' to view the premium commands.")
 end
 
