@@ -1,0 +1,538 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AnthonyIsntHere/anthonysrepository/main/scripts/AntiChatLogger.lua"))() 
+--
+--
+loadstring(game:HttpGet('https://pastebin.com/raw/qtMBhNmr'))() -- Local Library
+local chat = function(MSG)
+  game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(MSG, "All")
+ end
+ follow = false
+ local prefix = "-"
+ --chat("You can now control me. Type commands below to do so.")
+-- chat("Cmds: -move forward, -move backward, -move left, -move right, -point, -die, -follow, -reset, -bring, -funfact")
+-- chat("-shiftlock on/off, -stop, -dance, -dance2, -dance3, -laugh, -wave, -cheer, -jump, -say [word], -joke, -roast")
+ wait(0.6)
+ game.Players:Chat("/e point")
+ local keys = {
+  ["a"] = 0x41,
+  ["b"] = 0x42,
+  ["c"] = 0x43,
+  ["d"] = 0x44,
+  ["e"] = 0x45,
+  ["f"] = 0x46,
+  ["g"] = 0x47,
+  ["h"] = 0x48,
+  ["i"] = 0x49,
+  ["j"] = 0x4A,
+  ["k"] = 0x4B,
+  ["l"] = 0x4C,
+  ["m"] = 0x4D,
+  ["n"] = 0x4E,
+  ["o"] = 0x4F,
+  ["p"] = 0x50,
+  ["q"] = 0x51,
+  ["r"] = 0x52,
+  ["s"] = 0x53,
+  ["t"] = 0x54,
+  ["u"] = 0x55,
+  ["v"] = 0x56,
+  ["w"] = 0x57,
+  ["x"] = 0x58,
+  ["y"] = 0x59,
+  ["z"] = 0x5A,
+  ["0"] = 0x30,
+  ["1"] = 0x31,
+  ["2"] = 0x32,
+  ["3"] = 0x33,
+  ["4"] = 0x34,
+  ["5"] = 0x35,
+  ["6"] = 0x36,
+  ["7"] = 0x37,
+  ["8"] = 0x38,
+  ["9"] = 0x39,
+  ["+"] = 0xBB,
+  ["-"] = 0xBD,
+  [","] = 0xBC,
+  ["."] = 0xBE,
+  ["quote"] = 0xDE,
+  ["esc"] = 0x1B,
+  ["tab"] = 0x09,
+  ["caps"] = 0x14,
+  ["lshift"] = 0xA0,
+  ["rshift"] = 0xA1,
+  ["ctrl"] = 0x11,
+  ["lctrl"] = 0xA2,
+  ["rctrl"] = 0xA3,
+  ["lwin"] = 0x5B,
+  ["rwin"] = 0x5C,
+  ["alt"] = 0x12,
+  ["space"] = 0x20,
+  ["enter"] = 0x0D,
+  ["backspace"] = 0x08,
+  ["sshot"] = 0x2C,
+  ["scrolllock"] = 0x91,
+  ["pause"] = 0x13,
+  ["insert"] = 0x2D,
+  ["home"] = 0x24,
+  ["pgup"] = 0x21,
+  ["del"] = 0x2E,
+  ["end"] = 0x23,
+  ["pgdn"] = 0x22,
+  ["up_a"] = 0x26,
+  ["down_a"] = 0x28,
+  ["left_a"] = 0x25,
+  ["right_a"] = 0x27,
+  ["numlock"] = 0x90,
+  ["sleep"] = 0x5F,
+  ["n_0"] = 0x60,
+  ["n_1"] = 0x61,
+  ["n_2"] = 0x62,
+  ["n_3"] = 0x63,
+  ["n_4"] = 0x64,
+  ["n_5"] = 0x65,
+  ["n_6"] = 0x66,
+  ["n_7"] = 0x67,
+  ["n_8"] = 0x68,
+  ["n_9"] = 0x69,
+  ["v_mute"] = 0xAD,
+  ["v_up"] = 0xAF,
+  ["v_down"] = 0xAE,
+  ["next_t"] = 0xB0,
+  ["prev_t"] = 0xB1,
+  ["stop_t"] = 0xB2,
+  ["pause_t"] = 0xB3,
+  ["f1"] = 0x70,
+  ["f2"] = 0x71,
+  ["f3"] = 0x72,
+  ["f4"] = 0x73,
+  ["f5"] = 0x74,
+  ["f6"] = 0x75,
+  ["f7"] = 0x76,
+  ["f8"] = 0x77,
+  ["f9"] = 0x78,
+  ["f10"] = 0x79,
+  ["f11"] = 0x7A,
+  ["f12"] = 0x7B,
+ }
+ 
+ function hold(mousebutton)
+  if mousebutton == "left" then
+   mouse1down()
+  elseif mousebutton == "right" then
+   mouse2down()
+  end
+ end
+ 
+ function release(mousebutton)
+  if mousebutton == "left" then
+   mouse1up()
+  elseif mousebutton == "right" then
+   mouse2up()
+  end
+ end
+ 
+ function click(mousebutton)
+  if mousebutton == "left" then
+   mouse1click()
+  elseif mousebutton == "right" then
+   mouse2click()
+  end
+ end
+ 
+ function move(x,y)
+  mousemoveabs(x,y)
+ end
+ 
+ function scroll(p)
+  mousescroll(p)
+ end
+ 
+ function loopmove(x,y)
+  if canmove2 ~= false then
+   canmove1 = false
+   spawn(function()
+    local l
+    l = game:GetService("RunService").Heartbeat:Connect(function()
+     if canmove1 == true then
+      l:Disconnect()
+     end
+     wait()
+     move(x,y)
+    end)
+   end)
+  end
+ end
+ 
+ function breakmove()
+  canmove1 = false
+ end
+ 
+ local mouse = game:GetService("Players").LocalPlayer:GetMouse()
+ canmove2 = true
+ function togglemove()
+  if canmove1 ~= false then
+   if canmove2 == false then
+    canmove2 = true
+   elseif canmove2 == true then
+    canmove2 = false
+    mx = mouse.X
+    my = mouse.Y
+    spawn(function()
+     local l
+     l = game:GetService("RunService").Heartbeat:Connect(function()
+      if canmove2 == true then
+       l:Disconnect()
+      end
+      wait()
+      move(mx,my)
+     end)
+    end)
+   end
+  end
+ end
+ 
+ function type(string)
+  for _,char in pairs(string:split("")) do
+   wait(0.01)
+   if char == " " then
+    keypress(keys["space"])
+   else
+    if char:upper() == char and (char ~= "," and char ~= "." and char ~= "-" and char ~= "+" and char ~= "'" and char ~= '"' and char ~= "<" and char ~= ">" and char ~= "_" and char ~= "=") then
+     keypress(keys["lshift"])
+     keypress(keys[char:lower()])
+                 keyrelease(keys["lshift"])
+    else
+     if char == "'" then
+      keyrelease(keys["caps"])
+      keyrelease(keys["lshift"])
+      keypress(keys["quote"])
+     elseif char == '"' then
+      keyrelease(keys["caps"])
+      keypress(keys["lshift"])
+      keypress(keys["quote"])
+      keyrelease(keys["lshift"])
+     elseif char == "<" then
+      keyrelease(keys["caps"])
+      keypress(keys["lshift"])
+      keypress(keys[","])
+      keyrelease(keys["lshift"])
+     elseif char == ">" then
+      keyrelease(keys["caps"])
+      keypress(keys["lshift"])
+      keypress(keys["."])
+      keyrelease(keys["lshift"])
+     elseif char == "_" then
+      keyrelease(keys["caps"])
+      keypress(keys["lshift"])
+      keypress(keys["-"])
+      keyrelease(keys["lshift"])
+     elseif char == "=" then
+      keyrelease(keys["caps"])
+      keypress(keys["lshift"])
+      keypress(keys["+"])
+      keyrelease(keys["lshift"])
+     else
+      keyrelease(keys["caps"])
+      keyrelease(keys["lshift"])
+      keypress(keys[char])
+     end
+    end
+   end
+  end
+ end
+ 
+ 
+ 
+ local chatEvents = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents")
+ local messageDoneFiltering = chatEvents:WaitForChild("OnMessageDoneFiltering")
+ 
+ messageDoneFiltering.OnClientEvent:Connect(function(message)
+  local msg = message.Message or ""
+  local message = message.Message
+  function AddCmd(commandV)
+         return string.match(message,"^"..prefix..tostring(commandV))
+     end
+  
+
+
+   if AddCmd("say") then
+         if string.match(message,"^"..prefix.."say") then
+             local Args = string.match(message,"%"..prefix.."say%s?(.+)")
+             game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Args, "All")
+         end
+     end
+
+
+   
+     if msg:lower():sub(1,95) == "-chat bypassword" then
+        randfunc = math.random(1,8)
+        if randfunc == 1 then
+            chat("аss")
+        elseif randfunc == 2 then
+            chat("сосk")
+        elseif randfunc == 3 then
+            chat("hое")
+        elseif randfunc == 4 then
+            chat("аss hоlе")
+        elseif randfunc == 5 then
+            chat("СUМ")
+        elseif randfunc == 6 then
+            chat("АSS СRАСK")
+        elseif randfunc == 7 then
+            chat("ТНОТ")
+        else
+            chat("ВВС")
+        end
+ end
+ 
+
+     if msg:lower():sub(1,7) == "-follow" then
+      follow = true
+      if follow == true then
+       repeat task.wait()
+           game.Players.LocalPlayer.Character.Humanoid.WalkToPoint = game.Players[message.FromSpeaker].Character.HumanoidRootPart.Position
+       until follow == false
+      end
+   end
+   
+  if msg:lower():sub(1,9) == "-unfollow" then
+    follow = false
+  end
+  
+   if msg:lower():sub(1,5) == "-cmds" then
+   	chat("Commands: -move forward, -move backward, -move left, -move right, -point, -follow, -reset, -bring")
+    wait(1)
+   	chat("-shiftlock on/off, -stop, -dance, -dance2, -dance3, -laugh, -wave, -cheer, -jump, -say [word], -joke")
+   end
+   
+   if msg:lower():sub(1,9) == "-commands" then
+   	chat("Commands: -move forward, -move backward, -move left, -move right, -point, -follow, -reset, -bring")
+    wait(1)
+   	chat("-shiftlock on/off, -stop, -dance, -dance2, -dance3, -laugh, -wave, -cheer, -jump, -say [word], -joke")
+   end
+   
+   if msg:lower():sub(1,13) == "-move forward" then
+    keyrelease(keys["s"])
+    keypress(keys["w"])
+   end
+   
+   if msg:lower():sub(1,11) == "-go forward" then
+    keyrelease(keys["s"])
+    keypress(keys["w"])
+   end
+   
+    if msg:lower():sub(1,5) == "-walk" then
+    keyrelease(keys["s"])
+    keypress(keys["w"])
+   end
+   
+   if msg:lower():sub(1,5) == "-move" then
+    keyrelease(keys["s"])
+    keypress(keys["w"])
+   end
+   
+   if msg:lower():sub(1,8) == "-forward" then
+    keyrelease(keys["s"])
+    keypress(keys["w"])
+   end
+   
+   if msg:lower():sub(1,5) == "-back" then
+    keyrelease(keys["w"])
+    keypress(keys["s"])
+   end
+   
+   if msg:lower():sub(1,5) == "-left" then
+    keyrelease(keys["d"])
+    keypress(keys["a"])
+   end
+   
+   if msg:lower():sub(1,6) == "-right" then
+    keyrelease(keys["a"])
+    keypress(keys["d"])
+   end
+   
+   if msg:lower():sub(1,14) == "-move backward" then
+    keyrelease(keys["w"])
+    keypress(keys["s"])
+   end
+   
+   if msg:lower():sub(1,10) == "-move back" then
+    keyrelease(keys["w"])
+    keypress(keys["s"])
+   end
+   
+   if msg:lower():sub(1,8) == "-go back" then
+    keyrelease(keys["w"])
+    keypress(keys["s"])
+   end
+ 
+   if msg:lower():sub(1,10) == "-move left" then
+    keyrelease(keys["d"])
+    keypress(keys["a"])
+   end
+   
+   if msg:lower():sub(1,8) == "-go left" then
+    keyrelease(keys["d"])
+    keypress(keys["a"])
+   end
+ 
+   if msg:lower():sub(1,11) == "-move right" then
+    keyrelease(keys["a"])
+    keypress(keys["d"])
+   end
+   
+   if msg:lower():sub(1,9) == "-go right" then
+    keyrelease(keys["a"])
+    keypress(keys["d"])
+   end
+ 
+   if msg:lower():sub(1,13) == "-shiftlock on" then
+    keypress(keys["lshift"])
+    keyrelease(keys["lshift"])
+   end
+ 
+   if msg:lower():sub(1,14) == "-shiftlock off" then
+    keypress(keys["lshift"])
+    keyrelease(keys["lshift"])
+   end
+ 
+   if msg:lower():sub(1,5) == "-stop" then
+    keyrelease(keys["w"])
+    keyrelease(keys["s"])
+    keyrelease(keys["a"])
+    keyrelease(keys["d"])
+   end
+   
+   if msg:lower():sub(1,6) == "-roast" then
+   	randchoice = math.random(1,8)
+   	if randchoice == 1 then
+   		chat("Light travels faster than sound, which is why you seemed bright when you spoke")
+   	elseif randchoice == 2 then
+   		chat("I'll never forget the first time we met. but i'll keep trying.")
+   	elseif randchoice == 3 then
+   		chat("Someday You'll go far. I hope You Stay There.")
+   	elseif randchoice == 4 then
+   		chat("That's cool. But find someone who cares.")
+   	elseif randchoice == 5 then
+   		chat("Must be nice to never use your brain.")
+   	elseif randchoice == 6 then
+   		chat("Dont mind me, just looking for your mute button.")
+   	elseif randchoice == 7 then
+   		chat("Im no astronaut, but im pretty sure the world doesn't revolve around you")
+   	else
+   		chat("Bet you make your onions cry when you chop them.")
+   	end
+end
+   
+   if msg:lower():sub(1,8) == "-funfact" then
+   	randfunc = math.random(1,8)
+   	if randfunc == 1 then
+   		chat("Did you know, There are billion bacterias in your mouth.")
+   	elseif randfunc == 2 then
+   		chat("Did you know, Hippos sweats are actually pink.")
+   	elseif randfunc == 3 then
+   		chat("Did you know, Potatoes Were the first ever vegetables.")
+   	elseif randfunc == 4 then
+   		chat("Did you know, All Babies Were born with blue eyes.")
+   	elseif randfunc == 5 then
+   		chat("Did you know, Snakes don't blink because they do not have eyelids.")
+   	elseif randfunc == 6 then
+   		chat("Did you know, An Avarage person has over 1,460 dreams a year.")
+   	elseif randfunc == 7 then
+   		chat("Did you know, Pineapple used to be England's status symbol.")
+   	else
+   		chat("Did you know, There's No Sound in space.")
+   	end
+end
+   
+   if msg:lower():sub(1,5) == "-joke" then
+    randint = math.random(1,8)
+    if randint == 1 then
+        chat("What do you call a magic dog? A Labracadabrador.")
+    elseif randint == 2 then
+        chat("RIP Boiling Water, You Will be Mist.")
+    elseif randint == 3 then
+        chat("What did the pig say on a hot day? Im Bacon.")
+    elseif randint == 4 then
+        chat("Why did the bike fall over? Because It Was Two Tired.")
+    elseif randint == 5 then
+    	chat("What did one traffic light say to the other? Stop Looking, Im Changing!")
+    elseif randint == 6 then
+    	chat("Why was 6 afraid of 7? Because 7 8 9.")
+    elseif randint == 7 then
+    	chat("Once I got kidnapped by mimes. They did unspeakable things to me.")
+    else
+    	chat("What's The Difference Between Snowmen and Snowladies? Snowballs.")
+    end
+end
+ 
+   if msg:lower():sub(1,5) == "-wave" then
+    game.Players:Chat("/e wave")
+   end
+ 
+   if msg:lower():sub(1,6) == "-point" then
+    game.Players:Chat("/e point")
+   end
+ 
+   if msg:lower():sub(1,6) == "-laugh" then
+    game.Players:Chat("/e laugh")
+   end
+   
+   if msg:lower():sub(1,6) == "-cheer" then
+    game.Players:Chat("/e cheer")
+   end
+ 
+   if msg:lower():sub(1,6) == "-dance" then
+    game.Players:Chat("/e dance")
+   end
+   
+   if msg:lower():sub(1,7) == "-dance1" then
+    game.Players:Chat("/e dance1")
+   end
+   
+   if msg:lower():sub(1,7) == "-dance2" then
+    game.Players:Chat("/e dance2")
+   end
+ 
+   if msg:lower():sub(1,7) == "-dance3" then
+    game.Players:Chat("/e dance3")
+   end
+ 
+   if msg:lower():sub(1,5) == "-jump" then
+    keypress(keys["space"])
+    wait(0.1)
+    keyrelease(keys["space"])
+   end
+
+    if msg:lower():sub(1,6) == "-bring" then
+     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[message.FromSpeaker].Character.HumanoidRootPart.CFrame
+    end
+    
+    if msg:lower():sub(1,3) == "-tp" then
+     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[message.FromSpeaker].Character.HumanoidRootPart.CFrame
+    end 
+    
+    if msg:lower():sub(1,9) == "-teleport" then
+     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[message.FromSpeaker].Character.HumanoidRootPart.CFrame
+    end    
+    
+    if msg:lower():sub(1,6) == "-reset" then
+     game.Players.LocalPlayer.Character.Humanoid.Health = 0
+    end
+    
+    if msg:lower():sub(1,8) == "-refresh" then
+     game.Players.LocalPlayer.Character.Humanoid.Health = 0
+    end
+    
+    if msg:lower():sub(1,4) == "-die" then
+     game.Players.LocalPlayer.Character.Humanoid.Health = 0
+    end
+    
+    if msg:lower():sub(1,6) == "-death" then
+     game.Players.LocalPlayer.Character.Humanoid.Health = 0
+    end
+ 
+    if msg:lower():sub(1,3) == "-rj" then
+     game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+    end
+    
+ end)
