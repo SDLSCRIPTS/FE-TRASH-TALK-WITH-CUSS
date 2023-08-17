@@ -262,8 +262,11 @@ local chat = function(MSG)
      end
 
 
-   
-     if msg:lower():sub(1,95) == "-chat bypassword" then
+  
+ 
+
+
+    if msg:lower():sub(1,95) == "-chat bypassword" then
         randfunc = math.random(1,8)
         if randfunc == 1 then
             chat("аss")
@@ -281,9 +284,9 @@ local chat = function(MSG)
             chat("ТНОТ")
         else
             chat("ВВС")
-        end
+       end
  end
- 
+
 
      if msg:lower():sub(1,7) == "-follow" then
       follow = true
@@ -297,6 +300,14 @@ local chat = function(MSG)
   if msg:lower():sub(1,9) == "-unfollow" then
     follow = false
   end
+
+
+  if msg:lower():sub(1,73) == "-hello!" then
+    chat("Hey! I am an pet BOT.")
+ wait(1)
+    chat("Do you wanna buy the premium version of me? Say less! Type '-see premium' to view the premium commands.")
+end
+
   
    if msg:lower():sub(1,5) == "-cmds" then
    	chat("Commands: -move forward, -move backward, -move left, -move right, -point, -follow, -reset, -bring")
@@ -310,6 +321,11 @@ local chat = function(MSG)
    	chat("-shiftlock on/off, -stop, -dance, -dance2, -dance3, -laugh, -wave, -cheer, -jump, -say [word], -joke")
    end
    
+   if msg:lower():sub(1,92) == "-see premium" then
+    chat("Premium: -chat bypassword (MORE COMING SOON)")
+  end
+  
+
    if msg:lower():sub(1,13) == "-move forward" then
     keyrelease(keys["s"])
     keypress(keys["w"])
